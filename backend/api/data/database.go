@@ -1,4 +1,4 @@
-package database
+package data
 
 import (
 	"database/sql"
@@ -7,6 +7,27 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 )
+
+type Categorie struct {
+	ID          int
+	Nom         string
+	Description string
+}
+
+type Sujet struct {
+	ID          int
+	Titre       string
+	Contenu     string
+	AuteurID    int
+	CategorieID int
+}
+
+type Message struct {
+	ID       int
+	Contenu  string
+	AuteurID int
+	SujetID  int
+}
 
 var DB *sql.DB
 
@@ -27,4 +48,38 @@ func Connect() {
 	}
 
 	fmt.Println("✅ Connexion à MySQL réussie !")
+}
+
+func GetCategories() ([]Categorie, error) {
+	rows, err := DB.Query("SELECT id, nom, description FROM categories")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var categories []Categorie
+	for rows.Next() {
+		var c Categorie
+		if err := rows.Scan(&c.ID, &c.Nom, &c.Description); err != nil {
+			return nil, err
+		}
+		categories = append(categories, c)
+	}
+	return categories, nil
+}
+
+func InsertTopic(titre, contenu string, auteurID, categorieID int) error {
+	query := "INSERT INTO sujets (titre, contenu, auteur_id, categorie_id) VALUES (?, ?, ?, ?)"
+	_, err := DB.Exec(query, titre, contenu, auteurID, categorieID)
+	return err
+}
+
+func GetTopicByID(id int) (Sujet, error) {
+	// Stub: à implémenter avec une vraie requête SQL si besoin.
+	return Sujet{ID: id}, nil
+}
+
+func GetMessagesByTopicID(topicID int) ([]Message, error) {
+	// Stub: à implémenter avec une vraie requête SQL si besoin.
+	return []Message{}, nil
 }
