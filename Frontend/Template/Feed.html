@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SportForum — Feed d'actualité</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .nav-link { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; margin-bottom:4px; text-decoration:none; color:#374151; transition:background 0.15s; }
+    .nav-link:hover { background:#f3f4f6; }
+    .nav-link.active { background:#eff6ff; color:#2563eb; }
+    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; }
+    .fab:hover { width:170px; border-radius:28px; }
+    .fab-icon { flex-shrink:0; width:56px; height:56px; display:flex; align-items:center; justify-content:center; }
+    .fab-label { color:white; font-size:14px; font-weight:600; padding-right:16px; opacity:0; transition:opacity 0.2s; }
+    .fab:hover .fab-label { opacity:1; }
+  </style>
+</head>
+<body class="bg-gray-50 flex h-screen overflow-hidden">
+  <aside class="w-64 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
+    <div class="p-6">
+      <h1 class="font-bold text-2xl text-gray-900">SportForum</h1>
+      <p class="text-sm text-gray-500">Votre communauté sportive</p>
+    </div>
+    <nav class="flex-1 px-3">
+      <a href="feed.html" class="nav-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Feed d'actualité
+      </a>
+      <a href="tendance.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        En tendance
+      </a>
+      <a href="decouvrir.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        Découvrir
+      </a>
+      <a href="suivis.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        Mes suivis
+      </a>
+      <hr class="my-4 border-gray-200"/>
+      <a href="parametres.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        Paramètres
+      </a>
+      <a href="connexion.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+        Connexion
+      </a>
+    </nav>
+    <div class="p-4 border-t border-gray-200">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">S</div>
+        <div>
+          <p class="text-sm font-semibold text-gray-900">SportFan2024</p>
+          <p class="text-xs text-gray-500">sportfan@example.com</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 overflow-auto">
+    <div class="max-w-2xl mx-auto py-8 px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-2">Feed d'actualité</h2>
+      <p class="text-gray-500 mb-8">Les dernières publications de votre communauté</p>
+
+      <div class="flex gap-3 mb-8 overflow-x-auto pb-2">
+        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+          <div class="w-14 h-14 rounded-full ring-2 ring-blue-500 ring-offset-2 bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">M</div>
+          <span class="text-xs text-gray-600">Marc</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+          <div class="w-14 h-14 rounded-full ring-2 ring-pink-500 ring-offset-2 bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">S</div>
+          <span class="text-xs text-gray-600">Sophie</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+          <div class="w-14 h-14 rounded-full ring-2 ring-green-500 ring-offset-2 bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">T</div>
+          <span class="text-xs text-gray-600">Thomas</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+          <div class="w-14 h-14 rounded-full ring-2 ring-orange-500 ring-offset-2 bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">J</div>
+          <span class="text-xs text-gray-600">Julie</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+          <div class="w-14 h-14 rounded-full ring-2 ring-violet-500 ring-offset-2 bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">L</div>
+          <span class="text-xs text-gray-600">Lucas</span>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">M</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div><h3 class="font-bold text-gray-900">Marc Dupont</h3><p class="text-sm text-gray-500">Football · Il y a 2h</p></div>
+                <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full font-medium">⚽ Football</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-800 mb-4 leading-relaxed">Incroyable match hier soir ! Le PSG a vraiment montré du caractère. Mbappé en grande forme 🔥</p>
+          <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
+            <button onclick="like(this,145)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">145</span></button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 23</button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">S</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div><h3 class="font-bold text-gray-900">Sophie Martin</h3><p class="text-sm text-gray-500">Tennis · Il y a 4h</p></div>
+                <span class="text-xs bg-yellow-50 text-yellow-600 px-2 py-1 rounded-full font-medium">🎾 Tennis</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-800 mb-4 leading-relaxed">Roland-Garros approche ! Qui sont vos favoris cette année ? Moi je mise sur Alcaraz 🎾</p>
+          <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
+            <button onclick="like(this,89)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">89</span></button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 34</button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">T</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div><h3 class="font-bold text-gray-900">Thomas Bernard</h3><p class="text-sm text-gray-500">Basketball · Il y a 6h</p></div>
+                <span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full font-medium">🏀 Basketball</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-800 mb-4 leading-relaxed">Les Warriors en pleine forme ! Curry avec 42 points, c'est du grand spectacle 🏀</p>
+          <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
+            <button onclick="like(this,212)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">212</span></button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 45</button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">J</div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div><h3 class="font-bold text-gray-900">Julie Petit</h3><p class="text-sm text-gray-500">Running · Il y a 8h</p></div>
+                <span class="text-xs bg-green-50 text-green-600 px-2 py-1 rounded-full font-medium">🏃 Running</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-800 mb-4 leading-relaxed">Premier semi-marathon terminé en 1h45 ! Je suis tellement fière de moi 💪</p>
+          <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
+            <button onclick="like(this,178)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">178</span></button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 56</button>
+            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <div class="fab" onclick="alert('Créer un post !')">
+    <div class="fab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></div>
+    <span class="fab-label">Créer un post</span>
+  </div>
+  <script>
+    function like(btn, base) {
+      const isLiked = btn.dataset.liked === 'true';
+      btn.dataset.liked = !isLiked;
+      btn.querySelector('.count').textContent = isLiked ? base : base + 1;
+      btn.style.color = isLiked ? '' : '#ef4444';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SportForum — Découvrir</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .nav-link { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; margin-bottom:4px; text-decoration:none; color:#374151; transition:background 0.15s; }
+    .nav-link:hover { background:#f3f4f6; }
+    .nav-link.active { background:#eff6ff; color:#2563eb; }
+    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; }
+    .fab:hover { width:170px; border-radius:28px; }
+    .fab-icon { flex-shrink:0; width:56px; height:56px; display:flex; align-items:center; justify-content:center; }
+    .fab-label { color:white; font-size:14px; font-weight:600; padding-right:16px; opacity:0; transition:opacity 0.2s; }
+    .fab:hover .fab-label { opacity:1; }
+    .sport-card { background:white; border-radius:12px; box-shadow:0 1px 3px rgba(0,0,0,0.08); border:1px solid #f3f4f6; padding:16px; text-align:center; cursor:pointer; transition:all 0.2s; }
+    .sport-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.12); transform:translateY(-2px); }
+    .follow-btn { width:100%; margin-top:12px; background:#2563eb; color:white; border:none; padding:8px; border-radius:8px; cursor:pointer; font-size:14px; transition:background 0.15s; }
+    .follow-btn:hover { background:#1d4ed8; }
+    .follow-btn.following { background:#f3f4f6; color:#374151; }
+  </style>
+</head>
+<body class="bg-gray-50 flex h-screen overflow-hidden">
+  <aside class="w-64 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
+    <div class="p-6">
+      <h1 class="font-bold text-2xl text-gray-900">SportForum</h1>
+      <p class="text-sm text-gray-500">Votre communauté sportive</p>
+    </div>
+    <nav class="flex-1 px-3">
+      <a href="feed.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Feed d'actualité
+      </a>
+      <a href="tendance.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        En tendance
+      </a>
+      <a href="decouvrir.html" class="nav-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        Découvrir
+      </a>
+      <a href="suivis.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        Mes suivis
+      </a>
+      <hr class="my-4 border-gray-200"/>
+      <a href="parametres.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        Paramètres
+      </a>
+      <a href="connexion.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+        Connexion
+      </a>
+    </nav>
+    <div class="p-4 border-t border-gray-200">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">S</div>
+        <div><p class="text-sm font-semibold text-gray-900">SportFan2024</p><p class="text-xs text-gray-500">sportfan@example.com</p></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 overflow-auto">
+    <div class="max-w-4xl mx-auto py-8 px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-2">Découvrir</h2>
+      <p class="text-gray-500 mb-6">Explorez de nouveaux sports et rejoignez la communauté</p>
+
+      <div class="relative mb-8">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">🔍</span>
+        <input type="text" placeholder="Rechercher un sport, un utilisateur, un hashtag..." class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm" />
+      </div>
+
+      <div class="mb-8">
+        <h3 class="font-bold text-xl text-gray-900 mb-4">Catégories sportives</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="sport-card"><div class="text-4xl mb-2">⚽</div><h4 class="font-bold text-gray-900">Football</h4><p class="text-sm text-gray-500 mb-1">1.2M abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+          <div class="sport-card"><div class="text-4xl mb-2">🏀</div><h4 class="font-bold text-gray-900">Basketball</h4><p class="text-sm text-gray-500 mb-1">890K abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+          <div class="sport-card"><div class="text-4xl mb-2">🎾</div><h4 class="font-bold text-gray-900">Tennis</h4><p class="text-sm text-gray-500 mb-1">654K abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+          <div class="sport-card"><div class="text-4xl mb-2">🏉</div><h4 class="font-bold text-gray-900">Rugby</h4><p class="text-sm text-gray-500 mb-1">432K abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+          <div class="sport-card"><div class="text-4xl mb-2">🚴</div><h4 class="font-bold text-gray-900">Cyclisme</h4><p class="text-sm text-gray-500 mb-1">378K abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+          <div class="sport-card"><div class="text-4xl mb-2">🏊</div><h4 class="font-bold text-gray-900">Natation</h4><p class="text-sm text-gray-500 mb-1">267K abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+          <div class="sport-card"><div class="text-4xl mb-2">🏎️</div><h4 class="font-bold text-gray-900">Formule 1</h4><p class="text-sm text-gray-500 mb-1">945K abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+          <div class="sport-card"><div class="text-4xl mb-2">🏃</div><h4 class="font-bold text-gray-900">Athlétisme</h4><p class="text-sm text-gray-500 mb-1">289K abonnés</p><button class="follow-btn" onclick="toggleFollow(this)">Suivre</button></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-xl text-gray-900 mb-4">👥 Comptes suggérés</h3>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">S</div>
+              <div><h4 class="font-bold text-gray-900">SportActu24</h4><p class="text-sm text-gray-500">Multi-sports · 45K abonnés</p></div>
+            </div>
+            <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium follow-btn-inline">Suivre</button>
+          </div>
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">C</div>
+              <div><h4 class="font-bold text-gray-900">CoachPro</h4><p class="text-sm text-gray-500">Fitness · 32K abonnés</p></div>
+            </div>
+            <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Suivre</button>
+          </div>
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold">F</div>
+              <div><h4 class="font-bold text-gray-900">FootAnalyse</h4><p class="text-sm text-gray-500">Football · 28K abonnés</p></div>
+            </div>
+            <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Suivre</button>
+          </div>
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold">T</div>
+              <div><h4 class="font-bold text-gray-900">TennisPassion</h4><p class="text-sm text-gray-500">Tennis · 19K abonnés</p></div>
+            </div>
+            <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Suivre</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="fab" onclick="alert('Créer un post !')">
+    <div class="fab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></div>
+    <span class="fab-label">Créer un post</span>
+  </div>
+  <script>
+    function toggleFollow(btn) {
+      const isFollowing = btn.textContent.trim() === 'Abonné';
+      btn.textContent = isFollowing ? 'Suivre' : 'Abonné';
+      btn.style.background = isFollowing ? '' : '#f3f4f6';
+      btn.style.color = isFollowing ? '' : '#374151';
+    }
+  </script>
+</body>
+</html>
