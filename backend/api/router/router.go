@@ -15,4 +15,5 @@ func InitialiserRoutes() {
 
 	fs := http.FileServer(http.Dir("./Frontend/Static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 }

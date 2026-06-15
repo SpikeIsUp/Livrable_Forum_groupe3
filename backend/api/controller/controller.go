@@ -53,8 +53,8 @@ func CreateTopicHandler(w http.ResponseWriter, r *http.Request) {
 
 // Structure pour combiner les données à envoyer au template
 type SujetPageData struct {
-    Sujet    data.Sujet
-    Messages []data.Message
+	Sujet    data.Sujet
+	Messages []data.Message
 }
 
 func SujetHandler(w http.ResponseWriter, r *http.Request) {
@@ -67,10 +67,10 @@ func SujetHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Récupérer le sujet complet
-    sujet, _ := data.GetTopicByID(sujetID)
-    
-    // Récupérer les messages liés
-    messages, _ := data.GetMessagesByTopicID(sujetID)
+	sujet, _ := data.GetTopicByID(sujetID)
+
+	// Récupérer les messages liés
+	messages, _ := data.GetMessagesByTopicID(sujetID)
 	// Préparer les données pour le template
 	pageData := SujetPageData{
 		Sujet:    sujet,

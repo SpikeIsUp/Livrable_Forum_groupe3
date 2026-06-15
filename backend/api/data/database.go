@@ -66,6 +66,7 @@ func GetCategories() ([]Categorie, error) {
 		categories = append(categories, c)
 	}
 	return categories, nil
+
 }
 
 func InsertTopic(titre, contenu string, auteurID, categorieID int) error {
