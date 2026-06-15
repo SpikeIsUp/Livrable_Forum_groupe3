@@ -10,7 +10,7 @@
     .nav-link { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; margin-bottom:4px; text-decoration:none; color:#374151; transition:background 0.15s; }
     .nav-link:hover { background:#f3f4f6; }
     .nav-link.active { background:#fdf2f8; color:#db2777; }
-    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; }
+    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; z-index: 40; }
     .fab:hover { width:170px; border-radius:28px; }
     .fab-icon { flex-shrink:0; width:56px; height:56px; display:flex; align-items:center; justify-content:center; }
     .fab-label { color:white; font-size:14px; font-weight:600; padding-right:16px; opacity:0; transition:opacity 0.2s; }
@@ -56,7 +56,7 @@
       </a>
     </nav>
     <div class="p-4 border-t border-gray-200">
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="openProfile('SportFan2024')">
         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">S</div>
         <div><p class="text-sm font-semibold text-gray-900">SportFan2024</p><p class="text-xs text-gray-500">sportfan@example.com</p></div>
       </div>
@@ -74,9 +74,9 @@
  
           <div class="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
             <div class="flex flex-col items-center text-center">
-              <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-3">M</div>
-              <h4 class="font-bold text-gray-900">Marc Dupont</h4>
-              <p class="text-sm text-gray-500 mb-2">Football</p>
+              <div onclick="openProfile('Marc Dupont')" class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-3 cursor-pointer">M</div>
+              <h4 onclick="openProfile('Marc Dupont')" class="font-bold text-gray-900 cursor-pointer hover:underline">Marc Dupont</h4>
+              <p class="text-sm text-gray-500 mb-2">⚽ Football</p>
               <div class="flex gap-4 text-sm text-gray-600 mb-3"><span>12K abonnés</span><span>234 posts</span></div>
               <button class="btn-follow following" onclick="toggleFollow(this)">Ne plus suivre</button>
             </div>
@@ -84,9 +84,9 @@
  
           <div class="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
             <div class="flex flex-col items-center text-center">
-              <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-3">S</div>
-              <h4 class="font-bold text-gray-900">Sophie Martin</h4>
-              <p class="text-sm text-gray-500 mb-2">Tennis</p>
+              <div onclick="openProfile('Sophie Martin')" class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-3 cursor-pointer">S</div>
+              <h4 onclick="openProfile('Sophie Martin')" class="font-bold text-gray-900 cursor-pointer hover:underline">Sophie Martin</h4>
+              <p class="text-sm text-gray-500 mb-2">🎾 Tennis</p>
               <div class="flex gap-4 text-sm text-gray-600 mb-3"><span>8.5K abonnés</span><span>156 posts</span></div>
               <button class="btn-follow following" onclick="toggleFollow(this)">Ne plus suivre</button>
             </div>
@@ -94,9 +94,9 @@
  
           <div class="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
             <div class="flex flex-col items-center text-center">
-              <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-3">T</div>
-              <h4 class="font-bold text-gray-900">Thomas Bernard</h4>
-              <p class="text-sm text-gray-500 mb-2">Basketball</p>
+              <div onclick="openProfile('Thomas Bernard')" class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-3 cursor-pointer">T</div>
+              <h4 onclick="openProfile('Thomas Bernard')" class="font-bold text-gray-900 cursor-pointer hover:underline">Thomas Bernard</h4>
+              <p class="text-sm text-gray-500 mb-2">🏀 Basketball</p>
               <div class="flex gap-4 text-sm text-gray-600 mb-3"><span>15K abonnés</span><span>289 posts</span></div>
               <button class="btn-follow following" onclick="toggleFollow(this)">Ne plus suivre</button>
             </div>
@@ -108,39 +108,153 @@
       <div>
         <h3 class="font-bold text-xl text-gray-900 mb-4">Publications récentes</h3>
         <div class="space-y-6">
+          
           <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
             <div class="flex items-start gap-4 mb-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">M</div>
-              <div><h4 class="font-bold text-gray-900">Marc Dupont</h4><p class="text-sm text-gray-500">Il y a 1h</p></div>
+              <div onclick="openProfile('Marc Dupont')" class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">M</div>
+              <div>
+                <h4 onclick="openProfile('Marc Dupont')" class="font-bold text-gray-900 cursor-pointer hover:underline">Marc Dupont</h4>
+                <p class="text-sm text-gray-500">Il y a 1h</p>
+              </div>
             </div>
             <p class="text-gray-800 mb-4 leading-relaxed">Analyse tactique du match d'hier. Le 4-3-3 a parfaitement fonctionné ! Les milieux ont fourni un travail défensif incroyable.</p>
             <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
-              <button class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ 67</button>
+              <button id="like-post1" onclick="like('post1', 67, this)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">67</span></button>
               <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 12</button>
             </div>
           </article>
+          
           <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
             <div class="flex items-start gap-4 mb-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">S</div>
-              <div><h4 class="font-bold text-gray-900">Sophie Martin</h4><p class="text-sm text-gray-500">Il y a 3h</p></div>
+              <div onclick="openProfile('Sophie Martin')" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">S</div>
+              <div>
+                <h4 onclick="openProfile('Sophie Martin')" class="font-bold text-gray-900 cursor-pointer hover:underline">Sophie Martin</h4>
+                <p class="text-sm text-gray-500">Il y a 3h</p>
+              </div>
             </div>
             <p class="text-gray-800 mb-4 leading-relaxed">Entraînement matinal ✅ Prête pour le tournoi de samedi ! 2h de frappe de balle et ça fait du bien 🎾</p>
             <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
-              <button class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ 92</button>
+              <button id="like-post2" onclick="like('post2', 92, this)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">92</span></button>
               <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 18</button>
             </div>
           </article>
+
         </div>
       </div>
     </div>
   </main>
  
+  <div id="profileModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" onclick="closeProfile()">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden transform transition-all border border-gray-100" onclick="event.stopPropagation()">
+      <div class="h-24 bg-gradient-to-r from-blue-600 to-indigo-600 relative">
+        <button onclick="closeProfile()" class="absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 hover:bg-black/40 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm transition-colors">✕</button>
+      </div>
+      <div class="px-6 pb-6 relative">
+        <div id="modalAvatar" class="w-20 h-20 rounded-2xl border-4 border-white bg-gradient-to-br text-white font-bold text-2xl flex items-center justify-center shadow-md absolute -top-10 left-6"></div>
+        <div class="pt-12">
+          <h4 id="modalUsername" class="text-xl font-bold text-gray-900"></h4>
+          <p id="modalSport" class="text-sm font-medium inline-block mt-1 px-2.5 py-0.5 rounded-full"></p>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span>Membre depuis le <strong id="modalDate" class="font-medium text-gray-600"></strong></span>
+          </div>
+        </div>
+        <hr class="my-4 border-gray-100">
+        <div>
+          <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Dernières publications</h5>
+          <div id="modalPosts" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="fab" onclick="alert('Créer un post !')">
     <div class="fab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></div>
     <span class="fab-label">Créer un post</span>
   </div>
  
   <script>
+    // 1. Base de données locale synchronisée avec le feed
+    const usersDatabase = {
+      "Marc Dupont": {
+        initial: "M",
+        color: "from-blue-500 to-purple-500",
+        sport: "⚽ Football",
+        sportClass: "bg-blue-50 text-blue-600",
+        joinDate: "12 Mars 2022",
+        posts: [
+          "Analyse tactique du match d'hier. Le 4-3-3 a parfaitement fonctionné !",
+          "Incroyable match hier soir ! Le PSG a vraiment montré du caractère.",
+          "Qui est chaud pour un Five ce jeudi soir à Paris ?"
+        ]
+      },
+      "Sophie Martin": {
+        initial: "S",
+        color: "from-pink-500 to-rose-500",
+        sport: "🎾 Tennis",
+        sportClass: "bg-yellow-50 text-yellow-600",
+        joinDate: "05 Janvier 2023",
+        posts: [
+          "Entraînement matinal ✅ Prête pour le tournoi de samedi !",
+          "Roland-Garros approche ! Qui sont vos favoris cette année ?",
+          "Séance de service ce matin sous le soleil. Ça progresse !"
+        ]
+      },
+      "Thomas Bernard": {
+        initial: "T",
+        color: "from-green-500 to-teal-500",
+        sport: "🏀 Basketball",
+        sportClass: "bg-orange-50 text-orange-600",
+        joinDate: "22 Septembre 2021",
+        posts: [
+          "Les Warriors en pleine forme ! Curry avec 42 points.",
+          "Les Playoffs NBA cette année s'annoncent complètement imprévisibles."
+        ]
+      },
+      "SportFan2024": {
+        initial: "S",
+        color: "from-blue-500 to-purple-500",
+        sport: "🔥 Omnisports",
+        sportClass: "bg-gray-100 text-gray-800",
+        joinDate: "01 Janvier 2024",
+        posts: ["Ravi de rejoindre la communauté SportForum !"]
+      }
+    };
+
+    // 2. Fonctions de la Modal Profil
+    function openProfile(username) {
+      const user = usersDatabase[username];
+      if (!user) return;
+
+      const modalAvatar = document.getElementById('modalAvatar');
+      modalAvatar.className = `w-20 h-20 rounded-2xl border-4 border-white bg-gradient-to-br ${user.color} text-white font-bold text-2xl flex items-center justify-center shadow-md absolute -top-10 left-6`;
+      modalAvatar.textContent = user.initial;
+
+      document.getElementById('modalUsername').textContent = username;
+      
+      const sportTag = document.getElementById('modalSport');
+      sportTag.textContent = user.sport;
+      sportTag.className = `text-sm font-medium inline-block mt-1 px-2.5 py-0.5 rounded-full ${user.sportClass}`;
+      
+      document.getElementById('modalDate').textContent = user.joinDate;
+
+      const postsContainer = document.getElementById('modalPosts');
+      postsContainer.innerHTML = '';
+      user.posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = "p-2.5 bg-gray-50 rounded-lg text-sm text-gray-700 border border-gray-100 italic leading-relaxed";
+        postElement.textContent = `« ${post} »`;
+        postsContainer.appendChild(postElement);
+      });
+
+      document.getElementById('profileModal').classList.remove('hidden');
+    }
+
+    function closeProfile() {
+      document.getElementById('profileModal').classList.add('hidden');
+    }
+
+    // 3. Système d'abonnement d'origine
     function toggleFollow(btn) {
       const isFollowing = btn.classList.contains('following');
       if (isFollowing) {
@@ -153,6 +267,43 @@
         btn.textContent = 'Ne plus suivre';
       }
     }
+
+    // 4. Gestion persistante des Likes (avec localStorage)
+    function like(postId, baseCount, btn) {
+      // Regarde si le post est déjà liké dans le localStorage
+      const isLiked = localStorage.getItem(`liked_${postId}`) === 'true';
+      
+      // Inverse l'état
+      const newLikedState = !isLiked;
+      
+      // Sauvegarde le nouvel état
+      localStorage.setItem(`liked_${postId}`, newLikedState);
+      
+      // Met à jour l'interface graphique
+      updateLikeDOM(btn, baseCount, newLikedState);
+    }
+
+    function updateLikeDOM(btn, baseCount, isLiked) {
+      btn.querySelector('.count').textContent = isLiked ? baseCount + 1 : baseCount;
+      btn.style.color = isLiked ? '#ef4444' : '';
+    }
+
+    // 5. Au chargement de la page : Restaurer l'état des likes sauvegardés
+    window.addEventListener('DOMContentLoaded', () => {
+      // Configuration pour le post 1
+      const btn1 = document.getElementById('like-post1');
+      if(btn1) {
+        const isLiked1 = localStorage.getItem('liked_post1') === 'true';
+        updateLikeDOM(btn1, 67, isLiked1);
+      }
+      
+      // Configuration pour le post 2
+      const btn2 = document.getElementById('like-post2');
+      if(btn2) {
+        const isLiked2 = localStorage.getItem('liked_post2') === 'true';
+        updateLikeDOM(btn2, 92, isLiked2);
+      }
+    });
   </script>
 </body>
 </html>

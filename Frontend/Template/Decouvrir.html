@@ -10,16 +10,15 @@
     .nav-link { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; margin-bottom:4px; text-decoration:none; color:#374151; transition:background 0.15s; }
     .nav-link:hover { background:#f3f4f6; }
     .nav-link.active { background:#eff6ff; color:#2563eb; }
-    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; }
+    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; z-index: 40; }
     .fab:hover { width:170px; border-radius:28px; }
     .fab-icon { flex-shrink:0; width:56px; height:56px; display:flex; align-items:center; justify-content:center; }
     .fab-label { color:white; font-size:14px; font-weight:600; padding-right:16px; opacity:0; transition:opacity 0.2s; }
     .fab:hover .fab-label { opacity:1; }
     .sport-card { background:white; border-radius:12px; box-shadow:0 1px 3px rgba(0,0,0,0.08); border:1px solid #f3f4f6; padding:16px; text-align:center; cursor:pointer; transition:all 0.2s; }
     .sport-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.12); transform:translateY(-2px); }
-    .follow-btn { width:100%; margin-top:12px; background:#2563eb; color:white; border:none; padding:8px; border-radius:8px; cursor:pointer; font-size:14px; transition:background 0.15s; }
+    .follow-btn { width:100%; margin-top:12px; background:#2563eb; color:white; border:none; padding:8px; border-radius:8px; cursor:pointer; font-size:14px; transition:all 0.15s; }
     .follow-btn:hover { background:#1d4ed8; }
-    .follow-btn.following { background:#f3f4f6; color:#374151; }
   </style>
 </head>
 <body class="bg-gray-50 flex h-screen overflow-hidden">
@@ -56,7 +55,7 @@
       </a>
     </nav>
     <div class="p-4 border-t border-gray-200">
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="openProfile('SportFan2024')">
         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">S</div>
         <div><p class="text-sm font-semibold text-gray-900">SportFan2024</p><p class="text-xs text-gray-500">sportfan@example.com</p></div>
       </div>
@@ -90,49 +89,206 @@
       <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <h3 class="font-bold text-xl text-gray-900 mb-4">👥 Comptes suggérés</h3>
         <div class="space-y-4">
+          
           <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">S</div>
-              <div><h4 class="font-bold text-gray-900">SportActu24</h4><p class="text-sm text-gray-500">Multi-sports · 45K abonnés</p></div>
-            </div>
-            <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium follow-btn-inline">Suivre</button>
-          </div>
-          <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">C</div>
-              <div><h4 class="font-bold text-gray-900">CoachPro</h4><p class="text-sm text-gray-500">Fitness · 32K abonnés</p></div>
+              <div onclick="openProfile('SportActu24')" class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold cursor-pointer">S</div>
+              <div>
+                <h4 onclick="openProfile('SportActu24')" class="font-bold text-gray-900 cursor-pointer hover:underline">SportActu24</h4>
+                <p class="text-sm text-gray-500">Multi-sports · 45K abonnés</p>
+              </div>
             </div>
             <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Suivre</button>
           </div>
+          
           <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold">F</div>
-              <div><h4 class="font-bold text-gray-900">FootAnalyse</h4><p class="text-sm text-gray-500">Football · 28K abonnés</p></div>
+              <div onclick="openProfile('CoachPro')" class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold cursor-pointer">C</div>
+              <div>
+                <h4 onclick="openProfile('CoachPro')" class="font-bold text-gray-900 cursor-pointer hover:underline">CoachPro</h4>
+                <p class="text-sm text-gray-500">Fitness · 32K abonnés</p>
+              </div>
             </div>
             <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Suivre</button>
           </div>
+          
           <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold">T</div>
-              <div><h4 class="font-bold text-gray-900">TennisPassion</h4><p class="text-sm text-gray-500">Tennis · 19K abonnés</p></div>
+              <div onclick="openProfile('FootAnalyse')" class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold cursor-pointer">F</div>
+              <div>
+                <h4 onclick="openProfile('FootAnalyse')" class="font-bold text-gray-900 cursor-pointer hover:underline">FootAnalyse</h4>
+                <p class="text-sm text-gray-500">Football · 28K abonnés</p>
+              </div>
             </div>
             <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Suivre</button>
           </div>
+          
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+            <div class="flex items-center gap-3">
+              <div onclick="openProfile('TennisPassion')" class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold cursor-pointer">T</div>
+              <div>
+                <h4 onclick="openProfile('TennisPassion')" class="font-bold text-gray-900 cursor-pointer hover:underline">TennisPassion</h4>
+                <p class="text-sm text-gray-500">Tennis · 19K abonnés</p>
+              </div>
+            </div>
+            <button onclick="toggleFollow(this)" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">Suivre</button>
+          </div>
+
         </div>
       </div>
     </div>
   </main>
 
+  <div id="profileModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" onclick="closeProfile()">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden transform transition-all border border-gray-100" onclick="event.stopPropagation()">
+      <div class="h-24 bg-gradient-to-r from-blue-600 to-indigo-600 relative">
+        <button onclick="closeProfile()" class="absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 hover:bg-black/40 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm transition-colors">✕</button>
+      </div>
+      <div class="px-6 pb-6 relative">
+        <div id="modalAvatar" class="w-20 h-20 rounded-2xl border-4 border-white bg-gradient-to-br text-white font-bold text-2xl flex items-center justify-center shadow-md absolute -top-10 left-6"></div>
+        <div class="pt-12">
+          <h4 id="modalUsername" class="text-xl font-bold text-gray-900"></h4>
+          <p id="modalSport" class="text-sm font-medium inline-block mt-1 px-2.5 py-0.5 rounded-full"></p>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span>Membre depuis le <strong id="modalDate" class="font-medium text-gray-600"></strong></span>
+          </div>
+        </div>
+        <hr class="my-4 border-gray-100">
+        <div>
+          <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Dernières publications</h5>
+          <div id="modalPosts" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="fab" onclick="alert('Créer un post !')">
     <div class="fab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></div>
     <span class="fab-label">Créer un post</span>
   </div>
+
   <script>
+    // 1. Base de données étendue dédiée à la page Découvrir
+    const usersDatabase = {
+      "SportActu24": {
+        initial: "S",
+        color: "from-green-500 to-blue-500",
+        sport: "🌍 Multi-sports",
+        sportClass: "bg-teal-50 text-teal-600",
+        joinDate: "18 Octobre 2022",
+        posts: [
+          "Flash Info : Les qualifications pour le prochain tournoi mondial viennent de débuter !",
+          "Selon vous, quelle a été la plus grosse surprise sportive de la semaine ? 🏆",
+          "Retrouvez notre résumé complet des transferts majeurs de la mi-saison sur notre blog."
+        ]
+      },
+      "CoachPro": {
+        initial: "C",
+        color: "from-purple-500 to-pink-500",
+        sport: "💪 Fitness / Training",
+        sportClass: "bg-purple-50 text-purple-600",
+        joinDate: "04 Février 2023",
+        posts: [
+          "Stop aux erreurs ! Voici les 3 clés pour perfectionner votre posture au squat 🏋️‍♂️",
+          "Rappel du jour : Une bonne récupération est tout aussi importante qu'une bonne séance.",
+          "Nouveau programme Full-Body disponible gratuitement en story demain matin !"
+        ]
+      },
+      "FootAnalyse": {
+        initial: "F",
+        color: "from-orange-500 to-red-500",
+        sport: "⚽ Football",
+        sportClass: "bg-blue-50 text-blue-600",
+        joinDate: "29 Mai 2021",
+        posts: [
+          "Décryptage : Comment le bloc médian de l'équipe adverse a totalement étouffé les milieux hier.",
+          "Analyse vidéo : Le rôle crucial des pistons dans les transitions offensives rapides.",
+          "Mon prono et mes clés tactiques pour le choc européen de ce soir 📈"
+        ]
+      },
+      "TennisPassion": {
+        initial: "T",
+        color: "from-yellow-500 to-green-500",
+        sport: "🎾 Tennis",
+        sportClass: "bg-yellow-50 text-yellow-600",
+        joinDate: "11 Novembre 2024",
+        posts: [
+          "Quel combat en 5 sets ! Le tennis de haut niveau nous offre des émotions uniques.",
+          "Focus technique : L'importance du relâchement du poignet au moment de l'impact au service.",
+          "Tableau mis à jour pour le tournoi principal ! Qui rejoindra les quarts selon vous ?"
+        ]
+      },
+      "SportFan2024": {
+        initial: "S",
+        color: "from-blue-500 to-purple-500",
+        sport: "🔥 Omnisports",
+        sportClass: "bg-gray-100 text-gray-800",
+        joinDate: "01 Janvier 2024",
+        posts: ["Ravi de rejoindre la communauté SportForum !"]
+      }
+    };
+
+    // 2. Gestion de la Modal Profil
+    function openProfile(username) {
+      const user = usersDatabase[username];
+      if (!user) return;
+
+      const modalAvatar = document.getElementById('modalAvatar');
+      modalAvatar.className = `w-20 h-20 rounded-2xl border-4 border-white bg-gradient-to-br ${user.color} text-white font-bold text-2xl flex items-center justify-center shadow-md absolute -top-10 left-6`;
+      modalAvatar.textContent = user.initial;
+
+      document.getElementById('modalUsername').textContent = username;
+      
+      const sportTag = document.getElementById('modalSport');
+      sportTag.textContent = user.sport;
+      sportTag.className = `text-sm font-medium inline-block mt-1 px-2.5 py-0.5 rounded-full ${user.sportClass}`;
+      
+      document.getElementById('modalDate').textContent = user.joinDate;
+
+      const postsContainer = document.getElementById('modalPosts');
+      postsContainer.innerHTML = '';
+      user.posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = "p-2.5 bg-gray-50 rounded-lg text-sm text-gray-700 border border-gray-100 italic leading-relaxed";
+        postElement.textContent = `« ${post} »`;
+        postsContainer.appendChild(postElement);
+      });
+
+      document.getElementById('profileModal').classList.remove('hidden');
+    }
+
+    // Fermer la modal
+    function closeProfile() {
+      document.getElementById('profileModal').classList.add('hidden');
+    }
+
+    // 3. Gestion dynamique et harmonieuse du bouton Suivre / Abonné
     function toggleFollow(btn) {
       const isFollowing = btn.textContent.trim() === 'Abonné';
-      btn.textContent = isFollowing ? 'Suivre' : 'Abonné';
-      btn.style.background = isFollowing ? '' : '#f3f4f6';
-      btn.style.color = isFollowing ? '' : '#374151';
+      
+      if (isFollowing) {
+        btn.textContent = 'Suivre';
+        // Restaure le style d'origine selon le type de bouton
+        if (btn.classList.contains('follow-btn')) {
+          btn.style.background = '#2563eb';
+          btn.style.color = 'white';
+        } else {
+          btn.style.background = '#2563eb';
+          btn.style.color = 'white';
+          btn.classList.remove('bg-gray-100', 'text-gray-700');
+          btn.classList.add('bg-blue-600', 'hover:bg-blue-700', 'text-white');
+        }
+      } else {
+        btn.textContent = 'Abonné';
+        btn.style.background = '#f3f4f6';
+        btn.style.color = '#374151';
+        // Ajustement spécifique pour les boutons inline pour éviter les conflits Tailwind
+        if (!btn.classList.contains('follow-btn')) {
+          btn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'text-white');
+          btn.classList.add('bg-gray-100', 'text-gray-700');
+        }
+      }
     }
   </script>
 </body>

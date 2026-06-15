@@ -90,6 +90,7 @@
       </div>
 
       <div class="space-y-6">
+        <!-- Post 1 -->
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
             <div onclick="openProfile('Marc Dupont')" class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">M</div>
@@ -105,12 +106,21 @@
           </div>
           <p class="text-gray-800 mb-4 leading-relaxed">Incroyable match hier soir ! Le PSG a vraiment montré du caractère. Mbappé en grande forme 🔥</p>
           <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
-            <button onclick="like(this,145)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">145</span></button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 23</button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+            <button id="like-feed1" onclick="handleLike('feed1', 145, this)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">145</span></button>
+            <button onclick="toggleComments('feed1')" class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 <span id="comm-count-feed1">23</span></button>
+          </div>
+          
+          <!-- Section Commentaires Déroulante -->
+          <div id="comments-box-feed1" class="hidden mt-4 pt-4 border-t border-gray-100 space-y-4">
+            <div id="comments-list-feed1" class="space-y-3 max-h-48 overflow-y-auto text-sm"></div>
+            <div class="flex gap-2 mt-2">
+              <input type="text" id="comments-input-feed1" placeholder="Écrire un commentaire..." class="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+              <button onclick="addComment('feed1')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">Envoyer</button>
+            </div>
           </div>
         </article>
 
+        <!-- Post 2 -->
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
             <div onclick="openProfile('Sophie Martin')" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">S</div>
@@ -126,12 +136,21 @@
           </div>
           <p class="text-gray-800 mb-4 leading-relaxed">Roland-Garros approche ! Qui sont vos favoris cette année ? Moi je mise sur Alcaraz 🎾</p>
           <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
-            <button onclick="like(this,89)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">89</span></button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 34</button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+            <button id="like-feed2" onclick="handleLike('feed2', 89, this)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">89</span></button>
+            <button onclick="toggleComments('feed2')" class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 <span id="comm-count-feed2">34</span></button>
+          </div>
+          
+          <!-- Section Commentaires Déroulante -->
+          <div id="comments-box-feed2" class="hidden mt-4 pt-4 border-t border-gray-100 space-y-4">
+            <div id="comments-list-feed2" class="space-y-3 max-h-48 overflow-y-auto text-sm"></div>
+            <div class="flex gap-2 mt-2">
+              <input type="text" id="comments-input-feed2" placeholder="Écrire un commentaire..." class="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+              <button onclick="addComment('feed2')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">Envoyer</button>
+            </div>
           </div>
         </article>
 
+        <!-- Post 3 -->
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
             <div onclick="openProfile('Thomas Bernard')" class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">T</div>
@@ -147,12 +166,21 @@
           </div>
           <p class="text-gray-800 mb-4 leading-relaxed">Les Warriors en pleine forme ! Curry avec 42 points, c'est du grand spectacle 🏀</p>
           <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
-            <button onclick="like(this,212)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">212</span></button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 45</button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+            <button id="like-feed3" onclick="handleLike('feed3', 212, this)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">212</span></button>
+            <button onclick="toggleComments('feed3')" class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 <span id="comm-count-feed3">45</span></button>
+          </div>
+          
+          <!-- Section Commentaires Déroulante -->
+          <div id="comments-box-feed3" class="hidden mt-4 pt-4 border-t border-gray-100 space-y-4">
+            <div id="comments-list-feed3" class="space-y-3 max-h-48 overflow-y-auto text-sm"></div>
+            <div class="flex gap-2 mt-2">
+              <input type="text" id="comments-input-feed3" placeholder="Écrire un commentaire..." class="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+              <button onclick="addComment('feed3')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">Envoyer</button>
+            </div>
           </div>
         </article>
 
+        <!-- Post 4 -->
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
             <div onclick="openProfile('Julie Petit')" class="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">J</div>
@@ -168,15 +196,24 @@
           </div>
           <p class="text-gray-800 mb-4 leading-relaxed">Premier semi-marathon terminé en 1h45 ! Je suis tellement fière de moi 💪</p>
           <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
-            <button onclick="like(this,178)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">178</span></button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 56</button>
-            <button class="flex items-center gap-2 text-gray-500 hover:text-green-500 transition-colors ml-auto">↗ Partager</button>
+            <button id="like-feed4" onclick="handleLike('feed4', 178, this)" class="flex items-center gap-2 text-gray-500 hover:text-red-500 transition-colors">❤ <span class="count">178</span></button>
+            <button onclick="toggleComments('feed4')" class="flex items-center gap-2 text-gray-500 hover:text-blue-500 transition-colors">💬 <span id="comm-count-feed4">56</span></button>
+          </div>
+          
+          <!-- Section Commentaires Déroulante -->
+          <div id="comments-box-feed4" class="hidden mt-4 pt-4 border-t border-gray-100 space-y-4">
+            <div id="comments-list-feed4" class="space-y-3 max-h-48 overflow-y-auto text-sm"></div>
+            <div class="flex gap-2 mt-2">
+              <input type="text" id="comments-input-feed4" placeholder="Écrire un commentaire..." class="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+              <button onclick="addComment('feed4')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">Envoyer</button>
+            </div>
           </div>
         </article>
       </div>
     </div>
   </main>
 
+  <!-- MODAL : ENCADRÉ DU PROFIL UTILISATEUR -->
   <div id="profileModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" onclick="closeProfile()">
     <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden transform transition-all border border-gray-100" onclick="event.stopPropagation()">
       <div class="h-24 bg-gradient-to-r from-blue-600 to-indigo-600 relative">
@@ -200,8 +237,7 @@
 
         <div>
           <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Dernières publications</h5>
-          <div id="modalPosts" class="space-y-2 max-h-40 overflow-y-auto pr-1">
-            </div>
+          <div id="modalPosts" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
         </div>
       </div>
     </div>
@@ -280,18 +316,32 @@
         sport: "🔥 Omnisports",
         sportClass: "bg-gray-100 text-gray-800",
         joinDate: "01 Janvier 2024",
-        posts: [
-          "Ravi de rejoindre la communauté SportForum !"
-        ]
+        posts: ["Ravi de rejoindre la communauté SportForum !"]
       }
     };
 
-    // 2. Fonctions pour ouvrir et fermer l'encadré (Modal)
+    // 2. Base de données par défaut pour les commentaires initiaux
+    const initialComments = {
+      "feed1": [
+        { author: "Thomas Bernard", text: "Quel match de fou en effet !" },
+        { author: "Sophie Martin", text: "Mbappé est intenable en ce moment." }
+      ],
+      "feed2": [
+        { author: "Marc Dupont", text: "Alcaraz a toutes ses chances sur terre battue." }
+      ],
+      "feed3": [
+        { author: "Lucas Garcia", text: "Curry est d'une autre planète 👽" }
+      ],
+      "feed4": [
+        { author: "Sophie Martin", text: "Félicitations !! Super chrono pour un premier !" }
+      ]
+    };
+
+    // 3. Fonctions pour ouvrir et fermer l'encadré (Modal)
     function openProfile(username) {
       const user = usersDatabase[username];
-      if (!user) return; // Si l'utilisateur n'existe pas dans notre DB fictive
+      if (!user) return;
 
-      // Injecter les données dans l'encadré
       const modalAvatar = document.getElementById('modalAvatar');
       modalAvatar.className = `w-20 h-20 rounded-2xl border-4 border-white bg-gradient-to-br ${user.color} text-white font-bold text-2xl flex items-center justify-center shadow-md absolute -top-10 left-6`;
       modalAvatar.textContent = user.initial;
@@ -304,9 +354,8 @@
       
       document.getElementById('modalDate').textContent = user.joinDate;
 
-      // Générer la liste des derniers posts
       const postsContainer = document.getElementById('modalPosts');
-      postsContainer.innerHTML = ''; // Vider les anciens posts
+      postsContainer.innerHTML = '';
       user.posts.forEach(post => {
         const postElement = document.createElement('div');
         postElement.className = "p-2.5 bg-gray-50 rounded-lg text-sm text-gray-700 border border-gray-100 italic leading-relaxed";
@@ -314,22 +363,102 @@
         postsContainer.appendChild(postElement);
       });
 
-      // Afficher la modal en retirant le 'hidden'
       document.getElementById('profileModal').classList.remove('hidden');
     }
 
     function closeProfile() {
-      // Masquer la modal en ajoutant 'hidden'
       document.getElementById('profileModal').classList.add('hidden');
     }
 
-    // Gestion du bouton Like d'origine
-    function like(btn, base) {
-      const isLiked = btn.dataset.liked === 'true';
-      btn.dataset.liked = !isLiked;
-      btn.querySelector('.count').textContent = isLiked ? base : base + 1;
-      btn.style.color = isLiked ? '' : '#ef4444';
+    // 4. Gestion persistante des Likes (localStorage)
+    function handleLike(postId, baseCount, btn) {
+      const isLiked = localStorage.getItem(`liked_${postId}`) === 'true';
+      const newLikedState = !isLiked;
+      localStorage.setItem(`liked_${postId}`, newLikedState);
+      updateLikeDOM(btn, baseCount, newLikedState);
     }
+
+    function updateLikeDOM(btn, baseCount, isLiked) {
+      btn.querySelector('.count').textContent = isLiked ? baseCount + 1 : baseCount;
+      btn.style.color = isLiked ? '#ef4444' : '';
+    }
+
+    // 5. Gestion des Commentaires (Affichage, Ajout et Persistance)
+    function toggleComments(postId) {
+      const box = document.getElementById(`comments-box-${postId}`);
+      box.classList.toggle('hidden');
+      if (!box.classList.contains('hidden')) {
+        renderComments(postId);
+      }
+    }
+
+    function getComments(postId) {
+      const stored = localStorage.getItem(`comments_${postId}`);
+      if (stored) return JSON.parse(stored);
+      return initialComments[postId] || [];
+    }
+
+    function renderComments(postId) {
+      const comments = getComments(postId);
+      const listContainer = document.getElementById(`comments-list-${postId}`);
+      const countLabel = document.getElementById(`comm-count-${postId}`);
+      
+      // Mettre à jour le compteur dynamique
+      if (countLabel) countLabel.textContent = comments.length;
+
+      listContainer.innerHTML = '';
+      if (comments.length === 0) {
+        listContainer.innerHTML = `<p class="text-gray-400 italic text-xs">Aucun commentaire pour le moment.</p>`;
+        return;
+      }
+
+      comments.forEach(c => {
+        const div = document.createElement('div');
+        div.className = "bg-gray-50 p-2.5 rounded-lg border border-gray-100";
+        div.innerHTML = `<span class="font-bold text-gray-800 cursor-pointer hover:underline text-xs block mb-0.5" onclick="openProfile('${c.author}')">${c.author}</span>
+                         <p class="text-gray-700 leading-snug">${c.text}</p>`;
+        listContainer.appendChild(div);
+      });
+    }
+
+    function addComment(postId) {
+      const input = document.getElementById(`comments-input-${postId}`);
+      const text = input.value.trim();
+      if (!text) return;
+
+      const comments = getComments(postId);
+      // Ajout du commentaire sous l'identité de l'utilisateur connecté
+      comments.push({ author: "SportFan2024", text: text });
+      
+      localStorage.setItem(`comments_${postId}`, JSON.stringify(comments));
+      input.value = '';
+      
+      renderComments(postId);
+    }
+
+    // 6. Initialisation globale au chargement
+    window.addEventListener('DOMContentLoaded', () => {
+      const postsConfig = [
+        { id: 'feed1', baseLikes: 145 },
+        { id: 'feed2', baseLikes: 89 },
+        { id: 'feed3', baseLikes: 212 },
+        { id: 'feed4', baseLikes: 178 }
+      ];
+
+      postsConfig.forEach(post => {
+        // Restaurer l'état visuel et les valeurs des likes
+        const btn = document.getElementById(`like-${post.id}`);
+        if (btn) {
+          const isLiked = localStorage.getItem(`liked_${post.id}`) === 'true';
+          updateLikeDOM(btn, post.baseLikes, isLiked);
+        }
+
+        // Synchroniser les compteurs de commentaires globaux en tâche de fond
+        const comments = getComments(post.id);
+        const countLabel = document.getElementById(`comm-count-${post.id}`);
+        if (countLabel) countLabel.textContent = comments.length;
+      });
+    });
   </script>
 </body>
 </html>
