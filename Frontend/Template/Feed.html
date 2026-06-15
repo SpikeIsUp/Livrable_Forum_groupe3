@@ -10,7 +10,7 @@
     .nav-link { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; margin-bottom:4px; text-decoration:none; color:#374151; transition:background 0.15s; }
     .nav-link:hover { background:#f3f4f6; }
     .nav-link.active { background:#eff6ff; color:#2563eb; }
-    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; }
+    .fab { position:fixed; bottom:24px; right:24px; width:56px; height:56px; background:#111827; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); transition:all 0.3s ease; overflow:hidden; white-space:nowrap; z-index: 40; }
     .fab:hover { width:170px; border-radius:28px; }
     .fab-icon { flex-shrink:0; width:56px; height:56px; display:flex; align-items:center; justify-content:center; }
     .fab-label { color:white; font-size:14px; font-weight:600; padding-right:16px; opacity:0; transition:opacity 0.2s; }
@@ -51,7 +51,7 @@
       </a>
     </nav>
     <div class="p-4 border-t border-gray-200">
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="openProfile('SportFan2024')">
         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">S</div>
         <div>
           <p class="text-sm font-semibold text-gray-900">SportFan2024</p>
@@ -67,23 +67,23 @@
       <p class="text-gray-500 mb-8">Les dernières publications de votre communauté</p>
 
       <div class="flex gap-3 mb-8 overflow-x-auto pb-2">
-        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+        <div class="flex flex-col items-center gap-1 flex-shrink-0" onclick="openProfile('Marc Dupont')">
           <div class="w-14 h-14 rounded-full ring-2 ring-blue-500 ring-offset-2 bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">M</div>
           <span class="text-xs text-gray-600">Marc</span>
         </div>
-        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+        <div class="flex flex-col items-center gap-1 flex-shrink-0" onclick="openProfile('Sophie Martin')">
           <div class="w-14 h-14 rounded-full ring-2 ring-pink-500 ring-offset-2 bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">S</div>
           <span class="text-xs text-gray-600">Sophie</span>
         </div>
-        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+        <div class="flex flex-col items-center gap-1 flex-shrink-0" onclick="openProfile('Thomas Bernard')">
           <div class="w-14 h-14 rounded-full ring-2 ring-green-500 ring-offset-2 bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">T</div>
           <span class="text-xs text-gray-600">Thomas</span>
         </div>
-        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+        <div class="flex flex-col items-center gap-1 flex-shrink-0" onclick="openProfile('Julie Petit')">
           <div class="w-14 h-14 rounded-full ring-2 ring-orange-500 ring-offset-2 bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">J</div>
           <span class="text-xs text-gray-600">Julie</span>
         </div>
-        <div class="flex flex-col items-center gap-1 flex-shrink-0">
+        <div class="flex flex-col items-center gap-1 flex-shrink-0" onclick="openProfile('Lucas Garcia')">
           <div class="w-14 h-14 rounded-full ring-2 ring-violet-500 ring-offset-2 bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg cursor-pointer">L</div>
           <span class="text-xs text-gray-600">Lucas</span>
         </div>
@@ -92,10 +92,13 @@
       <div class="space-y-6">
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">M</div>
+            <div onclick="openProfile('Marc Dupont')" class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">M</div>
             <div class="flex-1">
               <div class="flex items-center justify-between">
-                <div><h3 class="font-bold text-gray-900">Marc Dupont</h3><p class="text-sm text-gray-500">Football · Il y a 2h</p></div>
+                <div>
+                  <h3 onclick="openProfile('Marc Dupont')" class="font-bold text-gray-900 cursor-pointer hover:underline">Marc Dupont</h3>
+                  <p class="text-sm text-gray-500">Football · Il y a 2h</p>
+                </div>
                 <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full font-medium">⚽ Football</span>
               </div>
             </div>
@@ -110,10 +113,13 @@
 
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">S</div>
+            <div onclick="openProfile('Sophie Martin')" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">S</div>
             <div class="flex-1">
               <div class="flex items-center justify-between">
-                <div><h3 class="font-bold text-gray-900">Sophie Martin</h3><p class="text-sm text-gray-500">Tennis · Il y a 4h</p></div>
+                <div>
+                  <h3 onclick="openProfile('Sophie Martin')" class="font-bold text-gray-900 cursor-pointer hover:underline">Sophie Martin</h3>
+                  <p class="text-sm text-gray-500">Tennis · Il y a 4h</p>
+                </div>
                 <span class="text-xs bg-yellow-50 text-yellow-600 px-2 py-1 rounded-full font-medium">🎾 Tennis</span>
               </div>
             </div>
@@ -128,10 +134,13 @@
 
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">T</div>
+            <div onclick="openProfile('Thomas Bernard')" class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">T</div>
             <div class="flex-1">
               <div class="flex items-center justify-between">
-                <div><h3 class="font-bold text-gray-900">Thomas Bernard</h3><p class="text-sm text-gray-500">Basketball · Il y a 6h</p></div>
+                <div>
+                  <h3 onclick="openProfile('Thomas Bernard')" class="font-bold text-gray-900 cursor-pointer hover:underline">Thomas Bernard</h3>
+                  <p class="text-sm text-gray-500">Basketball · Il y a 6h</p>
+                </div>
                 <span class="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full font-medium">🏀 Basketball</span>
               </div>
             </div>
@@ -146,10 +155,13 @@
 
         <article class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div class="flex items-start gap-4 mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">J</div>
+            <div onclick="openProfile('Julie Petit')" class="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 cursor-pointer">J</div>
             <div class="flex-1">
               <div class="flex items-center justify-between">
-                <div><h3 class="font-bold text-gray-900">Julie Petit</h3><p class="text-sm text-gray-500">Running · Il y a 8h</p></div>
+                <div>
+                  <h3 onclick="openProfile('Julie Petit')" class="font-bold text-gray-900 cursor-pointer hover:underline">Julie Petit</h3>
+                  <p class="text-sm text-gray-500">Running · Il y a 8h</p>
+                </div>
                 <span class="text-xs bg-green-50 text-green-600 px-2 py-1 rounded-full font-medium">🏃 Running</span>
               </div>
             </div>
@@ -165,11 +177,153 @@
     </div>
   </main>
 
+  <div id="profileModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" onclick="closeProfile()">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden transform transition-all border border-gray-100" onclick="event.stopPropagation()">
+      <div class="h-24 bg-gradient-to-r from-blue-600 to-indigo-600 relative">
+        <button onclick="closeProfile()" class="absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 hover:bg-black/40 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm transition-colors">✕</button>
+      </div>
+      
+      <div class="px-6 pb-6 relative">
+        <div id="modalAvatar" class="w-20 h-20 rounded-2xl border-4 border-white bg-gradient-to-br text-white font-bold text-2xl flex items-center justify-center shadow-md absolute -top-10 left-6"></div>
+        
+        <div class="pt-12">
+          <h4 id="modalUsername" class="text-xl font-bold text-gray-900"></h4>
+          <p id="modalSport" class="text-sm font-medium inline-block mt-1 px-2.5 py-0.5 rounded-full"></p>
+          
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span>Membre depuis le <strong id="modalDate" class="font-medium text-gray-600"></strong></span>
+          </div>
+        </div>
+
+        <hr class="my-4 border-gray-100">
+
+        <div>
+          <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Dernières publications</h5>
+          <div id="modalPosts" class="space-y-2 max-h-40 overflow-y-auto pr-1">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="fab" onclick="alert('Créer un post !')">
     <div class="fab-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></div>
     <span class="fab-label">Créer un post</span>
   </div>
+
   <script>
+    // 1. Base de données fictive pour les utilisateurs
+    const usersDatabase = {
+      "Marc Dupont": {
+        initial: "M",
+        color: "from-blue-500 to-purple-500",
+        sport: "⚽ Football",
+        sportClass: "bg-blue-50 text-blue-600",
+        joinDate: "12 Mars 2022",
+        posts: [
+          "Incroyable match hier soir ! Le PSG a vraiment montré du caractère.",
+          "Qui est chaud pour un Five ce jeudi soir à Paris ? Lyon-Nord ?",
+          "Franchement, le niveau tactique de Guardiola m'impressionne de jour en jour."
+        ]
+      },
+      "Sophie Martin": {
+        initial: "S",
+        color: "from-pink-500 to-rose-500",
+        sport: "🎾 Tennis",
+        sportClass: "bg-yellow-50 text-yellow-600",
+        joinDate: "05 Janvier 2023",
+        posts: [
+          "Roland-Garros approche ! Qui sont vos favoris cette année ?",
+          "Séance de service ce matin sous le soleil. Ça progresse !",
+          "Le match de Swiatek hier était d'une intensité folle !"
+        ]
+      },
+      "Thomas Bernard": {
+        initial: "T",
+        color: "from-green-500 to-teal-500",
+        sport: "🏀 Basketball",
+        sportClass: "bg-orange-50 text-orange-600",
+        joinDate: "22 Septembre 2021",
+        posts: [
+          "Les Warriors en pleine forme ! Curry avec 42 points.",
+          "Les Playoffs NBA cette année s'annoncent complètement imprévisibles.",
+          "Nouveau record personnel au shoot à 3 points à l'entraînement."
+        ]
+      },
+      "Julie Petit": {
+        initial: "J",
+        color: "from-orange-500 to-amber-500",
+        sport: "🏃 Running",
+        sportClass: "bg-green-50 text-green-600",
+        joinDate: "14 Juin 2024",
+        posts: [
+          "Premier semi-marathon terminé en 1h45 ! Trop fière !",
+          "Des conseils pour choisir des chaussures pour une foulée universelle ?",
+          "Petite sortie matinale de 8km pour bien commencer la semaine."
+        ]
+      },
+      "Lucas Garcia": {
+        initial: "L",
+        color: "from-violet-500 to-purple-500",
+        sport: "🚴 Cyclisme",
+        sportClass: "bg-purple-50 text-purple-600",
+        joinDate: "30 Novembre 2023",
+        posts: [
+          "Col de l'Izoard grimpé aujourd'hui. Les jambes piquent mais la vue en valait le coup !",
+          "Nouvelle guidoline installée sur le vélo de route."
+        ]
+      },
+      "SportFan2024": {
+        initial: "S",
+        color: "from-blue-500 to-purple-500",
+        sport: "🔥 Omnisports",
+        sportClass: "bg-gray-100 text-gray-800",
+        joinDate: "01 Janvier 2024",
+        posts: [
+          "Ravi de rejoindre la communauté SportForum !"
+        ]
+      }
+    };
+
+    // 2. Fonctions pour ouvrir et fermer l'encadré (Modal)
+    function openProfile(username) {
+      const user = usersDatabase[username];
+      if (!user) return; // Si l'utilisateur n'existe pas dans notre DB fictive
+
+      // Injecter les données dans l'encadré
+      const modalAvatar = document.getElementById('modalAvatar');
+      modalAvatar.className = `w-20 h-20 rounded-2xl border-4 border-white bg-gradient-to-br ${user.color} text-white font-bold text-2xl flex items-center justify-center shadow-md absolute -top-10 left-6`;
+      modalAvatar.textContent = user.initial;
+
+      document.getElementById('modalUsername').textContent = username;
+      
+      const sportTag = document.getElementById('modalSport');
+      sportTag.textContent = user.sport;
+      sportTag.className = `text-sm font-medium inline-block mt-1 px-2.5 py-0.5 rounded-full ${user.sportClass}`;
+      
+      document.getElementById('modalDate').textContent = user.joinDate;
+
+      // Générer la liste des derniers posts
+      const postsContainer = document.getElementById('modalPosts');
+      postsContainer.innerHTML = ''; // Vider les anciens posts
+      user.posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = "p-2.5 bg-gray-50 rounded-lg text-sm text-gray-700 border border-gray-100 italic leading-relaxed";
+        postElement.textContent = `« ${post} »`;
+        postsContainer.appendChild(postElement);
+      });
+
+      // Afficher la modal en retirant le 'hidden'
+      document.getElementById('profileModal').classList.remove('hidden');
+    }
+
+    function closeProfile() {
+      // Masquer la modal en ajoutant 'hidden'
+      document.getElementById('profileModal').classList.add('hidden');
+    }
+
+    // Gestion du bouton Like d'origine
     function like(btn, base) {
       const isLiked = btn.dataset.liked === 'true';
       btn.dataset.liked = !isLiked;
