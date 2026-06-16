@@ -444,25 +444,24 @@ async function reagirPost(idPost, typeReaction) {
     }
     
     try {
-        const url = `http://localhost:8080/api/like?uid=${utilisateurConnecte.id}&pid=${idPost}&type=${typeReaction}`;
+        // NOUVEAU : On utilise la nouvelle adresse "anti-adblock"
+        const url = `http://localhost:8080/api/reaction-post?uid=${utilisateurConnecte.id}&pid=${idPost}&type=${typeReaction}`;
         const reponse = await fetch(url);
         
         if (reponse.ok) {
-            // Le vote est passé en base de données
             const btnLike = document.getElementById('btn-like-post');
             const btnDislike = document.getElementById('btn-dislike-post');
             
-            // Si on est à l'intérieur du post, on change la couleur
             if (btnLike && typeReaction === 1) btnLike.style.background = '#15803d';
             if (btnDislike && typeReaction === -1) btnDislike.style.background = '#b91c1c';
             
-            // On renvoie à l'accueil pour forcer la mise à jour des chiffres à l'écran
             changerVue('vue-accueil'); 
         } else {
-            alert("❌ Le serveur Go a refusé le vote. Code erreur : " + reponse.status);
+            alert("❌ Le serveur Go a refusé le vote. Code : " + reponse.status);
         }
     } catch (erreur) { 
-        alert("❌ Erreur réseau : Impossible de joindre le serveur Go.");
+        // NOUVEAU : On affiche l'erreur technique exacte du navigateur
+        alert("❌ Erreur réseau interceptée par le navigateur : " + erreur.message);
         console.error(erreur);
     }
 }

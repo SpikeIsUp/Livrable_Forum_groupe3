@@ -26,4 +26,3 @@ func Connect() {
 
 	fmt.Println("✅ Connexion à MySQL (forum) réussie !")
 }
-s
