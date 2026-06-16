@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FootForum</title>
+    <!-- Chargement de la police moderne Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lien vers ton fichier CSS mis à jour -->
+    <link rel="stylesheet" href="../Static/css/index.css">
+</head>
+<body>
+
+    <!-- BANDEAU SUPÉRIEUR (HEADER FIXE) -->
+    <header class="header">
+        <div class="header-gauche">
+            <button class="btn-toggle-menu" onclick="toggleSidebar()">☰</button>
+            <div class="logo">FootForum</div>
+        </div>
+        <div class="header-droite">
+            <button class="btn-toggle-menu" onclick="changerTheme()">🌙</button>
+            <div id="zone-auth">
+                <button class="btn-action" onclick="changerVue('vue-connexion')">Connexion</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ARCHITECTURE PRINCIPALE (SIDEBAR + CONTENU) -->
+    <div class="layout-wrapper" id="app-layout">
+        
+        <!-- BARRE LATÉRALE DE NAVIGATION (SIDEBAR) -->
+        <aside class="sidebar" id="sidebar-menu">
+            <button onclick="changerVue('vue-accueil')">
+                <span class="icone">🏠</span><span class="texte-menu">Accueil</span>
+            </button>
+            <button onclick="changerVue('vue-tendance')">
+                <span class="icone">🔥</span><span class="texte-menu">Tendances</span>
+            </button>
+            <button id="btn-nav-messages" style="display: none;" onclick="changerVue('vue-messages')">
+                <span class="icone">💬</span><span class="texte-menu">Messages</span>
+            </button>
+            <button id="btn-nav-creer" style="display: none;" onclick="changerVue('vue-nouveau-sujet')">
+                <span class="icone" style="color: var(--accent);">⚽</span><span class="texte-menu">Nouveau Post</span>
+            </button>
+        </aside>
+
+        <!-- ZONE DE CONTENU CENTRAL (FLUX DYNAMIQUE) -->
+        <main class="main-content">
+            
+            <!-- ÉCRAN 1 : ACCUEIL -->
+            <div id="vue-accueil">
+                <h1 class="titre-section">Catégories du Forum</h1>
+                <div id="liste-categories"></div> 
+            </div>
+
+            <!-- ÉCRAN 2 : SUJETS D'UNE CATÉGORIE -->
+            <div id="vue-sujet" style="display: none;">
+                <button class="btn-action" style="background: var(--text-muted); margin-bottom: 20px;" onclick="changerVue('vue-accueil')">← Retour aux catégories</button>
+                <h1 id="titre-sujet-actif" class="titre-section">Discussions</h1>
+                <div id="messages-sujet"></div>
+            </div>
+
+            <!-- ÉCRAN 3 : LECTURE D'UN POST ET COMMENTAIRES -->
+            <div id="vue-lecture-post" style="display: none;">
+                <button class="btn-action" style="background: var(--text-muted); margin-bottom: 20px;" onclick="changerVue('vue-sujet')">← Retour aux sujets</button>
+                
+                <!-- Le post original -->
+                <div class="carte-forum" style="border: 2px solid var(--primary);">
+                    <h1 id="post-original-titre" style="color: var(--primary);">Titre</h1>
+                    <small id="post-original-auteur" style="color: var(--text-muted);"></small>
+                    <p id="post-original-corps" style="margin-top: 15px; font-size: 16px; line-height: 1.6; white-space: pre-wrap;"></p>
+                </div>
+
+                <h3 class="titre-section" style="font-size: 20px; margin-top: 30px;">Commentaires</h3>
+                
+                <!-- La liste des réponses -->
+                <div id="liste-commentaires"></div>
+
+                <!-- Zone pour répondre (Bouton et texte) -->
+                <div class="carte-forum" style="margin-top: 20px; background: var(--bg-main);">
+                    <textarea id="nouveau-commentaire-texte" placeholder="Écris ta réponse ici..." rows="3"></textarea>
+                    <button class="btn-action btn-nouveau" onclick="envoyerCommentaire()">Répondre</button>
+                </div>
+            </div>
+
+            <!-- ÉCRAN 4 : TENDANCES -->
+            <div id="vue-tendance" style="display: none;">
+                <h1 class="titre-section">Sujets Brûlants 🔥</h1>
+                <div id="liste-tendances"></div> 
+            </div>
+
+            <!-- ÉCRAN 5 : MESSAGERIE PRIVÉE -->
+            <div id="vue-messages" style="display: none;">
+                <h1 class="titre-section">Messagerie Privée</h1>
+                <div class="carte-forum">
+                    <h3 style="margin-bottom: 15px;">Envoyer un message privé</h3>
+                    <input type="text" id="mp-destinataire" placeholder="Pseudo exact du destinataire...">
+                    <textarea id="mp-contenu" placeholder="Écris ton message ici..." rows="3"></textarea>
+                    <button class="btn-action" onclick="envoyerMP()">Envoyer le message</button>
+                </div>
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">Boîte de réception</h3>
+                <div id="liste-messages"></div> 
+            </div>
+
+            <!-- ÉCRAN 6 : CRÉER UN NOUVEAU POST -->
+            <div id="vue-nouveau-sujet" style="display: none;">
+                <h1 class="titre-section">Lancer une nouvelle discussion</h1>
+                <div class="carte-forum">
+                    <input type="text" id="titre-sujet" placeholder="Titre de ton sujet...">
+                    <select id="select-categorie">
+                        <option value="">-- Sélectionne une catégorie --</option>
+                    </select>
+                    <textarea id="contenu-sujet" placeholder="Rédige le contenu de ton poste ici..." rows="6"></textarea>
+                    <button class="btn-action btn-nouveau" onclick="publierSujet()">Publier sur le forum</button>
+                </div>
+            </div>
+
+            <!-- ÉCRAN 7 : CONNEXION -->
+            <div id="vue-connexion" style="display: none;">
+                <h1 class="titre-section">Espace Connexion</h1>
+                <div class="carte-forum" style="max-width: 420px; margin: 40px auto 0 auto;">
+                    <input type="text" id="login-pseudo" placeholder="Nom d'utilisateur">
+                    <input type="password" id="login-mdp" placeholder="Mot de passe">
+                    <button class="btn-action" style="width: 100%; margin-bottom: 15px;" onclick="tenterConnexion()">Se connecter</button>
+                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 20px;">
+                    <p style="text-align: center; margin-bottom: 15px; color: var(--text-muted); font-size: 14px;">Nouveau sur l'application ?</p>
+                    <button class="btn-action" style="width: 100%; background: var(--text-muted);" onclick="changerVue('vue-inscription')">Créer un compte</button>
+                </div>
+            </div>
+
+            <!-- ÉCRAN 8 : INSCRIPTION -->
+            <div id="vue-inscription" style="display: none;">
+                <h1 class="titre-section">Créer un profil</h1>
+                <div class="carte-forum" style="max-width: 420px; margin: 40px auto 0 auto;">
+                    <input type="text" id="insc-pseudo" placeholder="Choisis un pseudonyme">
+                    <input type="password" id="insc-mdp" placeholder="Crée un mot de passe">
+                    <button class="btn-action btn-nouveau" style="width: 100%; margin-bottom: 15px;" onclick="tenterInscription()">Valider l'inscription</button>
+                    <button class="btn-action" style="width: 100%; background: var(--text-muted);" onclick="changerVue('vue-connexion')">Retour à la connexion</button>
+                </div>
+            </div>
+
+            <!-- ÉCRAN 9 : PROFIL -->
+            <div id="vue-profil" style="display: none;">
+                <h1 class="titre-section">Mon Compte</h1>
+                <div class="carte-forum" style="text-align: center; max-width: 450px; margin: 20px auto 0 auto;">
+                    <div style="margin-bottom: 20px;">
+                        <h2 id="profil-nom" style="font-size: 24px; font-weight: 700;">Nom d'utilisateur</h2>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-top: 5px;">Membre officiel de FootForum</p>
+                    </div>
+                    <button class="btn-action" style="background-color: #e74c3c; width: 100%;" onclick="seDeconnecter()">Me déconnecter</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Lien vers ton script JavaScript contenant la logique applicative -->
+    <script src="app.js"></script>
+</body>
+</html>
