@@ -15,4 +15,5 @@ func InitialiserRoutes() {
 	http.HandleFunc("/api/categories/posts", controller.GetPostsParCategorie)
 	http.HandleFunc("/api/commentaires", controller.AjouterCommentaire)
 	http.HandleFunc("/api/commentaires/lire", controller.GetCommentaires)
+	http.HandleFunc("/api/reaction-post", controller.ToggleLike)
 }

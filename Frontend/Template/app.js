@@ -215,8 +215,8 @@ async function chargerSujetsDeCategorie(idCategorie, titreCategorie) {
                 <div style="display: flex; justify-content: space-between; align-items: start;">
                     <h3 style="color: var(--primary); margin-bottom: 8px;">${post.titre}</h3>
                     <div style="display: flex; gap: 10px;">
-                        <span style="background: var(--bg-main); padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; border: 1px solid var(--border-color); color: #16a34a;">👍 ${post.nb_likes || 0}</span>
-                        <span style="background: var(--bg-main); padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; border: 1px solid var(--border-color); color: #dc2626;">👎 ${post.nb_dislikes || 0}</span>
+                        <button onclick="reagirPost(${post.id}, 1)" style="background: var(--bg-main); padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; border: 1px solid var(--border-color); color: #16a34a; cursor: pointer; transition: 0.2s;">👍 ${post.nb_likes || 0}</button>
+                        <button onclick="reagirPost(${post.id}, -1)" style="background: var(--bg-main); padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; border: 1px solid var(--border-color); color: #dc2626; cursor: pointer; transition: 0.2s;">👎 ${post.nb_dislikes || 0}</button>
                     </div>
                 </div>
                 <small style="color: var(--text-muted); display: block; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
@@ -230,7 +230,6 @@ async function chargerSujetsDeCategorie(idCategorie, titreCategorie) {
             btn.style.marginTop = '15px';
             btn.innerText = 'Lire et répondre 💬';
             
-            // LA FAMEUSE LIGNE EST ICI :
             btn.onclick = () => ouvrirPost(post.id, post.titre, post.corps, post.auteur, post.date, post.nb_likes, post.nb_dislikes);
 
             div.appendChild(btn);
@@ -419,65 +418,52 @@ function ouvrirPost(id, titre, corps, auteur, date, nbLikes, nbDislikes) {
     document.getElementById('post-original-auteur').innerHTML = `Posté par <strong>${auteur}</strong> le ${date}`;
     document.getElementById('post-original-corps').innerText = corps;
     
-    // On repère la zone où placer nos deux boutons
-    const zoneBoutons = document.getElementById('post-original-corps').parentNode;
-    
-    // On nettoie l'ancienne zone de boutons pour éviter les doublons si on clique sur plusieurs posts
-    const anciensBoutons = document.getElementById('zone-reactions');
-    if (anciensBoutons) anciensBoutons.remove();
-
-    // On crée une belle zone avec Like et Dislike
-    const divReactions = document.createElement('div');
-    divReactions.id = 'zone-reactions';
-    divReactions.style.display = 'flex';
-    divReactions.style.gap = '15px';
-    divReactions.style.marginTop = '25px';
-
-    divReactions.innerHTML = `
-        <button id="btn-like-post" class="btn-action" style="background: #16a34a; border-radius: 20px; font-weight: bold; width: 120px;">
-            👍 ${nbLikes}
-        </button>
-        <button id="btn-dislike-post" class="btn-action" style="background: #dc2626; border-radius: 20px; font-weight: bold; width: 120px;">
-            👎 ${nbDislikes}
-        </button>
+    // On injecte les boutons au bon endroit
+    const zoneBoutons = document.getElementById('zone-reactions-post');
+    zoneBoutons.innerHTML = `
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <button id="btn-like-post" class="btn-action" style="background: #16a34a; font-weight: bold; border-radius: 20px; width: 120px;">
+                👍 ${nbLikes || 0}
+            </button>
+            <button id="btn-dislike-post" class="btn-action" style="background: #dc2626; font-weight: bold; border-radius: 20px; width: 120px;">
+                👎 ${nbDislikes || 0}
+            </button>
+        </div>
     `;
-    
-    zoneBoutons.appendChild(divReactions);
 
-    // On attache les actions aux clics (1 pour Like, -1 pour Dislike)
+    // On active les clics
     document.getElementById('btn-like-post').onclick = () => reagirPost(id, 1);
     document.getElementById('btn-dislike-post').onclick = () => reagirPost(id, -1);
 
     chargerCommentaires();
 }
-
 async function reagirPost(idPost, typeReaction) {
-    // Le mouchard : on écrit dans la console pour voir si le clic marche !
-    console.log("--- NOUVEAU VOTE ---");
-    console.log("1. Clic détecté ! Post ID :", idPost, "| Type de vote :", typeReaction);
-
-    if(!utilisateurConnecte) {
-        alert("Tu dois être connecté pour réagir à un post !");
+    if (!utilisateurConnecte) {
+        alert("❌ Tu dois être connecté pour liker ou disliker !");
         return;
     }
     
-    console.log("2. Utilisateur connecté avec l'ID :", utilisateurConnecte.id);
-
     try {
         const url = `http://localhost:8080/api/like?uid=${utilisateurConnecte.id}&pid=${idPost}&type=${typeReaction}`;
-        console.log("3. Envoi de la requête au serveur Go via l'URL :", url);
-
         const reponse = await fetch(url);
-        console.log("4. Le serveur Go a répondu avec le statut :", reponse.status);
-
+        
         if (reponse.ok) {
-            alert(typeReaction === 1 ? "👍 Like enregistré !" : "👎 Dislike enregistré !");
+            // Le vote est passé en base de données
+            const btnLike = document.getElementById('btn-like-post');
+            const btnDislike = document.getElementById('btn-dislike-post');
+            
+            // Si on est à l'intérieur du post, on change la couleur
+            if (btnLike && typeReaction === 1) btnLike.style.background = '#15803d';
+            if (btnDislike && typeReaction === -1) btnDislike.style.background = '#b91c1c';
+            
+            // On renvoie à l'accueil pour forcer la mise à jour des chiffres à l'écran
+            changerVue('vue-accueil'); 
         } else {
-            alert("❌ Go a refusé le vote (Code " + reponse.status + ").");
+            alert("❌ Le serveur Go a refusé le vote. Code erreur : " + reponse.status);
         }
-    } catch(e) { 
-        console.error("5. ❌ Erreur réseau critique :", e);
-        alert("❌ Impossible de joindre le serveur Go.");
+    } catch (erreur) { 
+        alert("❌ Erreur réseau : Impossible de joindre le serveur Go.");
+        console.error(erreur);
     }
 }
 

@@ -6,12 +6,11 @@
     <title>FootForum</title>
     <!-- Chargement de la police moderne Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lien vers ton fichier CSS mis à jour -->
     <link rel="stylesheet" href="../Static/css/index.css">
 </head>
 <body>
 
-    <!-- BANDEAU SUPÉRIEUR (HEADER FIXE) -->
+    <!-- BANDEAU SUPÉRIEUR -->
     <header class="header">
         <div class="header-gauche">
             <button class="btn-toggle-menu" onclick="toggleSidebar()">☰</button>
@@ -25,10 +24,10 @@
         </div>
     </header>
 
-    <!-- ARCHITECTURE PRINCIPALE (SIDEBAR + CONTENU) -->
+    <!-- ARCHITECTURE PRINCIPALE -->
     <div class="layout-wrapper" id="app-layout">
         
-        <!-- BARRE LATÉRALE DE NAVIGATION (SIDEBAR) -->
+        <!-- MENU LATÉRAL -->
         <aside class="sidebar" id="sidebar-menu">
             <button onclick="changerVue('vue-accueil')">
                 <span class="icone">🏠</span><span class="texte-menu">Accueil</span>
@@ -44,7 +43,7 @@
             </button>
         </aside>
 
-        <!-- ZONE DE CONTENU CENTRAL (FLUX DYNAMIQUE) -->
+        <!-- ZONE DE CONTENU CENTRAL -->
         <main class="main-content">
             
             <!-- ÉCRAN 1 : ACCUEIL -->
@@ -64,19 +63,18 @@
             <div id="vue-lecture-post" style="display: none;">
                 <button class="btn-action" style="background: var(--text-muted); margin-bottom: 20px;" onclick="changerVue('vue-sujet')">← Retour aux sujets</button>
                 
-                <!-- Le post original -->
                 <div class="carte-forum" style="border: 2px solid var(--primary);">
                     <h1 id="post-original-titre" style="color: var(--primary);">Titre</h1>
                     <small id="post-original-auteur" style="color: var(--text-muted);"></small>
                     <p id="post-original-corps" style="margin-top: 15px; font-size: 16px; line-height: 1.6; white-space: pre-wrap;"></p>
+                    
+                    <!-- Zone où le JavaScript va créer les boutons Like / Dislike -->
+                    <div id="zone-reactions-post"></div>
                 </div>
 
                 <h3 class="titre-section" style="font-size: 20px; margin-top: 30px;">Commentaires</h3>
-                
-                <!-- La liste des réponses -->
                 <div id="liste-commentaires"></div>
 
-                <!-- Zone pour répondre (Bouton et texte) -->
                 <div class="carte-forum" style="margin-top: 20px; background: var(--bg-main);">
                     <textarea id="nouveau-commentaire-texte" placeholder="Écris ta réponse ici..." rows="3"></textarea>
                     <button class="btn-action btn-nouveau" onclick="envoyerCommentaire()">Répondre</button>
@@ -89,7 +87,7 @@
                 <div id="liste-tendances"></div> 
             </div>
 
-            <!-- ÉCRAN 5 : MESSAGERIE PRIVÉE -->
+            <!-- ÉCRAN 5 : MESSAGES PRIVÉS -->
             <div id="vue-messages" style="display: none;">
                 <h1 class="titre-section">Messagerie Privée</h1>
                 <div class="carte-forum">
@@ -102,7 +100,7 @@
                 <div id="liste-messages"></div> 
             </div>
 
-            <!-- ÉCRAN 6 : CRÉER UN NOUVEAU POST -->
+            <!-- ÉCRAN 6 : NOUVEAU POST -->
             <div id="vue-nouveau-sujet" style="display: none;">
                 <h1 class="titre-section">Lancer une nouvelle discussion</h1>
                 <div class="carte-forum">
@@ -154,7 +152,7 @@
         </main>
     </div>
 
-    <!-- Lien vers ton script JavaScript contenant la logique applicative -->
+    <!-- Le JavaScript -->
     <script src="app.js"></script>
 </body>
 </html>
